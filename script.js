@@ -1,4 +1,4 @@
-// Scroll Reveal
+// SCROLL REVEAL
 const reveals = document.querySelectorAll(".reveal");
 
 function revealOnScroll() {
@@ -15,52 +15,53 @@ window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
 
-// Mouse Reactive Neural Background
+// STARFIELD
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let mouse = { x: canvas.width/2, y: canvas.height/2 };
-
-window.addEventListener("mousemove", e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-let particles = [];
-
-for (let i = 0; i < 110; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: Math.random() * 2 + 0.5,
-    vx: Math.random() * 0.5 - 0.25,
-    vy: Math.random() * 0.5 - 0.25
-  });
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 
+resizeCanvas();
+window.addEventListener("resize", () => {
+  resizeCanvas();
+  initStars();
+});
+
+let stars = [];
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 300; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2,
+      speed: Math.random() * 0.6 + 0.2,
+      opacity: Math.random()
+    });
+  }
+}
+
+initStars();
+
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(0,0,0,0.5)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach(p => {
+  stars.forEach(star => {
+    star.y += star.speed;
 
-    let dx = mouse.x - p.x;
-    let dy = mouse.y - p.y;
-    let dist = Math.sqrt(dx*dx + dy*dy);
-
-    if (dist < 150) {
-      p.x -= dx * 0.002;
-      p.y -= dy * 0.002;
+    if (star.y > canvas.height) {
+      star.y = 0;
+      star.x = Math.random() * canvas.width;
     }
 
-    p.x += p.vx;
-    p.y += p.vy;
-
-    ctx.fillStyle = "rgba(255,255,255,0.8)";
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${star.opacity})`;
     ctx.fill();
   });
 

@@ -5,7 +5,7 @@
 }
 
 html, body {
-  background: #0a0a0a;
+  background: #000;
   color: white;
   font-family: 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
@@ -49,7 +49,10 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
+  pointer-events: none;
 }
 
 /* HERO */
@@ -68,14 +71,14 @@ canvas {
 }
 
 .hero h1 {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   margin-bottom: 25px;
   line-height: 1.2;
 }
 
 .hero p {
   font-size: 1.1rem;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* SECTIONS */
@@ -84,27 +87,41 @@ canvas {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
 }
 
 .section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
+  font-size: 2.4rem;
+  margin-bottom: 50px;
 }
 
-.section p {
-  font-size: 1.05rem;
-  opacity: 0.85;
+/* BACKGROUNDS (TRANSPARENT FOR STAR VISIBILITY) */
+.dark {
+  background: rgba(17,17,17,0.85);
 }
 
-/* BACKGROUNDS */
-.dark { background: #111; }
-.dark-alt { background: #151515; }
-.gradient { background: linear-gradient(135deg, #111827, #1e293b); }
-.final { background: linear-gradient(180deg, #0f172a, #000); }
+.dark-alt {
+  background: rgba(21,21,21,0.85);
+}
+
+.gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(17,24,39,0.85),
+    rgba(30,41,59,0.85)
+  );
+}
+
+.final {
+  background: linear-gradient(
+    180deg,
+    rgba(15,23,42,0.85),
+    rgba(0,0,0,0.95)
+  );
+}
 
 /* CARDS */
 .cards {
@@ -115,20 +132,50 @@ canvas {
 }
 
 .card {
-  background: #1a1a1a;
+  background: rgba(26,26,26,0.9);
   padding: 35px;
   width: 280px;
   border: 1px solid #333;
   transition: 0.3s ease;
 }
 
-.card h3 {
-  margin-bottom: 15px;
-}
-
 .card:hover {
   transform: translateY(-8px);
   border-color: #00bfff;
+}
+
+/* PROCESS */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 5%;
+  width: 90%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #00bfff, transparent);
+}
+
+.step {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #00bfff;
+  border-radius: 50%;
+  margin: 0 auto 15px auto;
+  box-shadow: 0 0 12px #00bfff;
 }
 
 /* BUTTON */
@@ -157,7 +204,7 @@ footer {
   opacity: 0.6;
 }
 
-/* REVEAL */
+/* SCROLL REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
