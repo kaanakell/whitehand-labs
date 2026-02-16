@@ -55,3 +55,35 @@ a {
 a:hover {
   color: #0077ff;
 }
+
+body {
+  background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #111827, #0f172a);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: white;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+header {
+  background: transparent;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
