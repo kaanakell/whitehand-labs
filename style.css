@@ -5,8 +5,8 @@
 }
 
 html, body {
-  background: #000;
-  color: white;
+  background: #0000006c;
+  color: rgb(255, 255, 255);
   font-family: 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
 }
@@ -44,7 +44,7 @@ nav {
   color: #00bfff;
 }
 
-/* CANVAS */
+/* CANVAS BACKGROUND */
 canvas {
   position: fixed;
   top: 0;
@@ -98,30 +98,11 @@ canvas {
   margin-bottom: 50px;
 }
 
-/* BACKGROUNDS (TRANSPARENT FOR STAR VISIBILITY) */
-.dark {
-  background: rgba(17,17,17,0.85);
-}
-
-.dark-alt {
-  background: rgba(21,21,21,0.85);
-}
-
-.gradient {
-  background: linear-gradient(
-    135deg,
-    rgba(17,24,39,0.85),
-    rgba(30,41,59,0.85)
-  );
-}
-
-.final {
-  background: linear-gradient(
-    180deg,
-    rgba(15,23,42,0.85),
-    rgba(0,0,0,0.95)
-  );
-}
+/* BACKGROUNDS */
+.dark { background: rgba(17,17,17,0.85); }
+.dark-alt { background: rgba(21,21,21,0.85); }
+.gradient { background: linear-gradient(135deg, rgba(17,24,39,0.85), rgba(30,41,59,0.85)); }
+.final { background: linear-gradient(180deg, rgba(15,23,42,0.85), rgba(0,0,0,0.95)); }
 
 /* CARDS */
 .cards {
@@ -144,7 +125,7 @@ canvas {
   border-color: #00bfff;
 }
 
-/* PROCESS */
+/* PROCESS TIMELINE */
 .timeline {
   display: flex;
   justify-content: space-between;
@@ -161,6 +142,7 @@ canvas {
   width: 90%;
   height: 2px;
   background: linear-gradient(to right, transparent, #00bfff, transparent);
+  z-index: 0;
 }
 
 .step {
