@@ -1,6 +1,5 @@
-// ===== SCROLL REVEAL =====
+// SCROLL REVEAL
 const reveals = document.querySelectorAll(".reveal");
-
 function revealOnScroll() {
     reveals.forEach(el => {
         const windowHeight = window.innerHeight;
@@ -10,11 +9,10 @@ function revealOnScroll() {
         }
     });
 }
-
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
-// ===== STARFIELD BACKGROUND =====
+// STARFIELD BACKGROUND
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -26,14 +24,15 @@ function resizeCanvas() {
     canvas.style.height = window.innerHeight + "px";
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-
 resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize", () => {
+    resizeCanvas();
+});
 
 let stars = [];
 function initStars() {
     stars = [];
-    for (let i = 0; i < 220; i++) {
+    for (let i = 0; i < 250; i++) {
         stars.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
@@ -44,7 +43,7 @@ function initStars() {
 }
 initStars();
 
-function animateStars() {
+function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     stars.forEach(star => {
         star.y += star.speed;
@@ -57,60 +56,6 @@ function animateStars() {
         ctx.fillStyle = "white";
         ctx.fill();
     });
-    requestAnimationFrame(animateStars);
+    requestAnimationFrame(animate);
 }
-animateStars();
-
-// ===== ITCH.IO PROJECTS AUTOMATIC IMAGE FETCH =====
-const itchProjects = [
-    { url: "https://kaljal.itch.io/hollow-grin", title: "Hollow Grin" },
-    { url: "https://kaljal.itch.io/mech-a-stand", title: "Mech A Stand" },
-    { url: "https://kaljal.itch.io/monster-food", title: "Monster Food" },
-    { url: "https://kaljal.itch.io/bright-minds", title: "Bright Minds" }
-];
-
-const ghProjects = [
-    { url: "https://github.com/kaanakell/TaskFlow", title: "TaskFlow" },
-    { url: "https://github.com/kaanakell/GGJ_2026", title: "GGJ_2026" },
-    { url: "https://github.com/kaanakell/PicToGraph", title: "PicToGraph" }
-];
-
-const itchGrid = document.getElementById("itch-grid");
-const ghGrid = document.getElementById("gh-grid");
-
-function addCard(container, project, imgSrc) {
-    const card = document.createElement("div");
-    card.className = "project-card";
-    card.innerHTML = `
-      <a href="${project.url}" target="_blank">
-        <img src="${imgSrc}" alt="${project.title}">
-        <h3>${project.title}</h3>
-      </a>
-    `;
-    container.appendChild(card);
-}
-
-// Fetch itch.io image with CORS proxy
-function fetchItchImage(project) {
-    const encodedURL = encodeURIComponent(project.url);
-    const proxyURL = `https://api.allorigins.win/get?url=${encodedURL}`;
-    fetch(proxyURL)
-        .then(res => res.json())
-        .then(data => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data.contents, "text/html");
-            let img = doc.querySelector('meta[property="og:image"]')?.content;
-            if (!img) img = "https://via.placeholder.com/400x225.png?text=No+Image";
-            addCard(itchGrid, project, img);
-        })
-        .catch(() => {
-            addCard(itchGrid, project, "https://via.placeholder.com/400x225.png?text=No+Image");
-        });
-}
-
-itchProjects.forEach(fetchItchImage);
-
-// Add GitHub projects with placeholder
-ghProjects.forEach(project => {
-    addCard(ghGrid, project, "https://via.placeholder.com/400x225.png?text=GitHub+Project");
-});
+animate();
