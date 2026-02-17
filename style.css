@@ -5,8 +5,8 @@
 }
 
 html, body {
-  background: #0000006c;
-  color: rgb(255, 255, 255);
+  background: #0000006c; /* transparency for stars */
+  color: white;
   font-family: 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
 }
@@ -79,6 +79,13 @@ canvas {
 .hero p {
   font-size: 1.1rem;
   opacity: 0.85;
+}
+
+.links a {
+  color: #00bfff;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 /* SECTIONS */
