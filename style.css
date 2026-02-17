@@ -7,7 +7,7 @@
 html,
 body {
   background: #0000006c;
-  color: white;
+  color: #fff;
   font-family: 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
 }
@@ -127,36 +127,40 @@ canvas {
 .card {
   background: rgba(26, 26, 26, 0.9);
   padding: 20px;
-  width: 260px;
+  width: 240px;
   border: 1px solid #333;
   transition: 0.3s ease;
 }
 
+.card:hover {
+  transform: translateY(-8px);
+  border-color: #00bfff;
+}
+
+/* Card Images */
 .card img {
   width: 100%;
+  height: 180px;
+  object-fit: cover;
   border-radius: 6px;
   margin-bottom: 12px;
 }
 
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card .btn {
-  margin-top: 10px;
-}
-
-/* More Projects */
-.more-projects {
-  margin-top: 40px;
+/* More projects link */
+.more-projects p {
+  margin-top: 25px;
+  color: #fff;
 }
 
 .more-projects a {
-  color: #00bfff;
+  color: #00ffff;
+  font-weight: 600;
   text-decoration: none;
+  transition: 0.3s;
 }
 
 .more-projects a:hover {
+  color: #00bfff;
   text-decoration: underline;
 }
 
@@ -198,8 +202,8 @@ canvas {
 /* BUTTON */
 .btn {
   display: inline-block;
+  margin-top: 15px;
   padding: 10px 20px;
-  margin-top: 10px;
   border: 1px solid white;
   text-decoration: none;
   color: white;

@@ -1,5 +1,6 @@
 // SCROLL REVEAL
 const reveals = document.querySelectorAll(".reveal");
+
 function revealOnScroll() {
     reveals.forEach(el => {
         const windowHeight = window.innerHeight;
@@ -9,6 +10,7 @@ function revealOnScroll() {
         }
     });
 }
+
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
@@ -16,7 +18,7 @@ revealOnScroll();
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-function resizeCanvas() {
+function resize() {
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
@@ -24,12 +26,15 @@ function resizeCanvas() {
     canvas.style.height = window.innerHeight + "px";
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
-resizeCanvas();
+
+resize();
 window.addEventListener("resize", () => {
-    resizeCanvas();
+    resize();
+    initStars();
 });
 
 let stars = [];
+
 function initStars() {
     stars = [];
     for (let i = 0; i < 250; i++) {
@@ -41,21 +46,26 @@ function initStars() {
         });
     }
 }
+
 initStars();
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     stars.forEach(star => {
         star.y += star.speed;
         if (star.y > canvas.height) {
             star.y = 0;
             star.x = Math.random() * canvas.width;
         }
+
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fillStyle = "white";
         ctx.fill();
     });
+
     requestAnimationFrame(animate);
 }
+
 animate();
